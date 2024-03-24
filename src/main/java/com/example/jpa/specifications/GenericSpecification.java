@@ -1,6 +1,5 @@
 package com.example.jpa.specifications;
 
-import com.example.entities.Dog;
 import com.example.jpa.utils.SearchCriteria;
 import com.example.jpa.utils.SearchOperation;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -12,11 +11,11 @@ import org.springframework.data.jpa.domain.Specification;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DogSpecification implements Specification<Dog> {
+public class GenericSpecification<T> implements Specification<T> {
 
     private List<SearchCriteria> list;
 
-    public DogSpecification() {
+    public GenericSpecification() {
         this.list = new ArrayList<>();
     }
 
@@ -25,7 +24,7 @@ public class DogSpecification implements Specification<Dog> {
     }
 
     @Override
-    public Predicate toPredicate(Root<Dog> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+    public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 
         //create a new predicate list
         List<Predicate> predicates = new ArrayList<>();

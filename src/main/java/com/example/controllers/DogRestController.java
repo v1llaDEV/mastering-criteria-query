@@ -1,12 +1,10 @@
 package com.example.controllers;
 
+import com.example.dto.DogSearchFilterDto;
 import com.example.entities.Dog;
-import com.example.repositories.DogJpaRepository;
+import com.example.services.DogService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,17 +13,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DogRestController {
 
-    private final DogJpaRepository dogJpaRepository;
+    private final DogService dogService;
 
     @GetMapping
     public List<Dog> getAllDogs(){
-        return dogJpaRepository.findAll();
+        return dogService.getAllDogs();
     }
 
     @GetMapping("/{dogId}")
-    public Dog getAllDogs(@PathVariable Long dogId){
-        return dogJpaRepository.findById(dogId)
-                .orElseThrow(() -> new RuntimeException("Resource not found"));
+    public Dog getDogById(@PathVariable Long dogId){
+        return dogService.getDogById(dogId);
+    }
+
+    @PostMapping("/search")
+    public List<Dog> getDogsByAnyAttribute(@RequestBody DogSearchFilterDto dogSearchFilterDto) throws IllegalAccessException {
+        return dogService.getDogsByAnyAttribute(dogSearchFilterDto);
     }
 
 }
