@@ -1,6 +1,7 @@
 package com.example.controllers;
 
-import com.example.dto.DogSearchFilterDto;
+import com.example.dto.filters.DogSearchFilterDto;
+import com.example.dto.responses.DogResponseDto;
 import com.example.entities.Dog;
 import com.example.services.DogService;
 import lombok.RequiredArgsConstructor;
@@ -16,17 +17,17 @@ public class DogRestController {
     private final DogService dogService;
 
     @GetMapping
-    public List<Dog> getAllDogs(){
+    public List<DogResponseDto> getAllDogs(){
         return dogService.getAllDogs();
     }
 
     @GetMapping("/{dogId}")
-    public Dog getDogById(@PathVariable Long dogId){
+    public DogResponseDto getDogById(@PathVariable Long dogId){
         return dogService.getDogById(dogId);
     }
 
     @PostMapping("/search")
-    public List<Dog> getDogsByAnyAttribute(@RequestBody DogSearchFilterDto dogSearchFilterDto) throws IllegalAccessException {
+    public List<DogResponseDto> getDogsByAnyAttribute(@RequestBody DogSearchFilterDto dogSearchFilterDto) throws IllegalAccessException {
         return dogService.getDogsByAnyAttribute(dogSearchFilterDto);
     }
 

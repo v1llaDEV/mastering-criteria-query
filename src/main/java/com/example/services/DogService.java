@@ -1,13 +1,14 @@
 package com.example.services;
 
-import com.example.dto.DogSearchFilterDto;
+import com.example.dto.filters.DogSearchFilterDto;
+import com.example.dto.responses.DogResponseDto;
 import com.example.entities.Dog;
 
 import java.util.List;
 
 public interface DogService {
 
-    List<Dog> getAllDogs();
-    Dog getDogById(Long dogId);
-    List<Dog> getDogsByAnyAttribute(DogSearchFilterDto dogSearchFilterDto) throws IllegalAccessException;
+    List<DogResponseDto> getAllDogs();
+    DogResponseDto getDogById(Long dogId);
+    List<DogResponseDto> getDogsByAnyAttribute(DogSearchFilterDto dogSearchFilterDto) throws IllegalAccessException;
 }
